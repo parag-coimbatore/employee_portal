@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form, .table {
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .form, .table table {
+    border-collapse: collapse;
+  }
+  
+  .form h2, .table h2 {
+    margin-top: 0;
+  }
+  
+  .form label, .table th, .table td {
+    padding: 5px;
+  }
+  
+  .form input, .form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .form button {
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .error {
+    color: red;
+    background-color: lightcoral;
+    text-align: center;
+    font-size: 19px;
+    font-style: italic;
+    margin-bottom: 15px;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ddd;
+  }
+  
+  .table th {
+    background-color: #f2f2f2;
+  }
+  
+  .table td {
+    text-align: center;
+  }
+  
+  .table img {
+    max-width: 100px;
+  }
+  
+  .actions button {
+    padding: 4px 8px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  
+  .actions button.edit {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .actions button.delete {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .actions button.view {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .user{
+      color: white;
+      text-align: center;
+  }
+  
+  .userTable{
+      text-align: center;
+      width: 100px;
+      background-color: #007BFF;
+      color: black;
+  }
+  
+  .table {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+    align-self: center;
+  }
+  
