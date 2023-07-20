@@ -102,7 +102,7 @@ function addUser() {
             </td>
         `;
         resetForm();
-        scrollDown();
+        scrollDown();w
     }
 }
 
