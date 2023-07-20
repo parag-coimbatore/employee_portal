@@ -7,12 +7,9 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body background="./background.jpg">
-    <h1 class="user">User Information</h1>
+    <h1 class="user">Employee portal</h1>
     <div class="container">
-        <div>
-            
-        </div>
-        <div class="form">
+        <div class="form" id="section1">
             <h2 class="user">Add User</h2>
             <label class="user" for="id">ID:</label>
             <input type="text" id="id" required>
@@ -48,15 +45,23 @@
             <input type="text" id="photo" required>
             <div class="error" id="photoError"></div>
 
-            <button  class="user" onclick="addUser()">Add</button>
+            <button style="width: 100%;"  class="user" onclick="addUser()">Add</button>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
         </div>
 
         
     </div>
 
-    <div class="table">
+    <div class="table" id="section2">
         <h2 class="user">User List</h2>
-        <table  id="userTable">
+        <table  id="userTable" style="width: 100%;">
             <tr class="userTable">
                 <th>ID</th>
                 <th>Name</th>
@@ -68,7 +73,6 @@
             </tr>
         </table>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>

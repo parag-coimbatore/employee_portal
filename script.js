@@ -30,7 +30,7 @@ function validateForm() {
     let isValid = true;
 
     if (!id) {
-        document.getElementById("idError").textContent = "ID cannot be empty.";
+        document.getElementById("idError").textContent = "ID cannot be null.";
         isValid = false;
     }
 
@@ -101,9 +101,14 @@ function addUser() {
                 <button class="view" onclick="viewUser(this)">View</button>
             </td>
         `;
-
         resetForm();
+        scrollDown();
     }
+}
+
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    section.scrollIntoView({ behavior: "smooth" });
 }
 
 function editUser(editButton) {
@@ -138,3 +143,9 @@ function viewUser(viewButton) {
     photoInput.value = cells[5].getElementsByTagName("img")[0].getAttribute("src");
 }
 
+function scrollDown() {
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
+}

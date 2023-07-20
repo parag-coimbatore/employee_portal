@@ -42,8 +42,8 @@ body {
   }
   
   .error {
-    color: red;
-    background-color: lightcoral;
+    color: white;
+    background-color: darkred;
     text-align: center;
     font-size: 19px;
     font-style: italic;
