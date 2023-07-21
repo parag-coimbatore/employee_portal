@@ -149,7 +149,9 @@ function viewUser(viewButton) {
 
 function searchUser() {
     const filterInput = document.getElementById("filterInput");
+    //sab unn ko dhundega jiski value id filterinput hogi
     const rows = document.querySelectorAll("#userTable tr:not(:first-child)");
+    
     const filterValue = filterInput.value.toLowerCase();
 
     rows.forEach(row => {

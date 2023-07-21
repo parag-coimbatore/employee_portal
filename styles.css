@@ -49,12 +49,27 @@ body {
   margin-bottom: 15px;
 }
 
+/*Center the table */
+.table {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  color: white;
+  margin-top: 50px; /* Add some top margin to create space between the form and table */
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
 .table th, .table td {
   border: 1px solid #ddd;
+  
 }
 
 .table th {
-  background-color: #f2f2f2;
+  background-color: #a2d7e4;
 }
 
 .table td {
