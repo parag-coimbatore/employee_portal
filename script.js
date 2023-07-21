@@ -15,12 +15,11 @@ function resetForm() {
     photoInput.value = "";
 
     // Clear error messages
-    const errors = document.querySelectorAll(".error");  //return karega all html element with class="error"
-    errors.forEach(error => error.textContent = "");     //unn return kiye hue elements pe sabke textcontext ko empty string karega
+    const errors = document.querySelectorAll(".error");
+    errors.forEach(error => error.textContent = "");
 }
 
 function validateForm() {
-    //getting all the values from the input to variables
     const id = idInput.value;
     const name = nameInput.value;
     const age = parseInt(ageInput.value);
@@ -28,58 +27,45 @@ function validateForm() {
     const designation = designationInput.value;
     const photoUrl = photoInput.value;
 
-    //A variable to keep track of the form's validity
     let isValid = true;
 
-    //id cant be null
     if (!id) {
         document.getElementById("idError").textContent = "ID cannot be null.";
         isValid = false;
     }
 
-    //Name cant be in numbers 
     if (!name.match(/^[A-Za-z\s]+$/)) {
         document.getElementById("nameError").textContent = "Name should contain alphabets only.";
         isValid = false;
     }
 
-    //age in 18 to 60
     if (age < 18 || age > 60) {
         document.getElementById("ageError").textContent = "Age should be in the range of 18 to 60.";
         isValid = false;
     }
 
-    //gender should be added
     if (!gender) {
         document.getElementById("genderError").textContent = "Please select a gender.";
         isValid = false;
     }
 
-    //designation should be add
     if (!designation) {
         document.getElementById("designationError").textContent = "Please select a designation.";
         isValid = false;
     }
 
-    //photourl should be added compulsorily
     if (!photoUrl) {
         document.getElementById("photoError").textContent = "Self Photo URL cannot be empty.";
         isValid = false;
     }
 
-    //sab theek hai
     return isValid;
 }
 
-//id unique hona chahiye
 function isIdUnique(id) {
-    //gets all rows , not header
     const rows = table.getElementsByTagName("tr");
-    for (let i = 1; i < rows.length; i++) { // Skip karega header row
+    for (let i = 1; i < rows.length; i++) {
         const cells = rows[i].getElementsByTagName("td");
-        // anything cell is means the inputs
-        //cell 0 matlab at first cell i.e id it should not be same as id 
-        //kisi bhi row k column mein id pahle jaisa same na ho
         if (cells[0].textContent === id) {
             return false;
         }
@@ -87,9 +73,7 @@ function isIdUnique(id) {
     return true;
 }
 
-
 function addUser() {
-    //agar theek se validate ho gaya toh , aage 
     if (validateForm()) {
         const id = idInput.value;
         const name = nameInput.value;
@@ -98,16 +82,12 @@ function addUser() {
         const designation = designationInput.value;
         const photoUrl = photoInput.value;
 
-        //if id is not unique , give error
         if (!isIdUnique(id)) {
             document.getElementById("idError").textContent = "ID should be unique.";
             return;
         }
 
-        //create new row 
         const newRow = table.insertRow(-1);
-        //-1 means it will be inserted at the end of row
-        //innerhtml is used to enter info in html table
         newRow.innerHTML = `
             <td>${id}</td>
             <td>${name}</td>
@@ -118,64 +98,40 @@ function addUser() {
             <td class="actions">
                 <button class="edit" onclick="editUser(this)">Edit</button>
                 <button class="delete" onclick="deleteUser(this)">Delete</button>
-                <button class="view" onclick="viewUser(this)" readonly>View</button>
+                <button class="view" onclick="viewUser(this)">View</button>
             </td>
         `;
-        resetForm(); //resets form
-        scrollDown(); //scrolls down
+        resetForm();
+        scrollDown();
     }
 }
 
-//scrolls down as soon as something is added
-function scrollToSection(sectionId) {
-    const section = document.getElementById(sectionId);
-    section.scrollIntoView({ behavior: "smooth" });
+function scrollDown() {
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
 }
 
+function editUser(editButton) {
+    const row = editButton.parentNode.parentNode;
+    const cells = row.getElementsByTagName("td");
 
-// //not working
-// function editUser(editButton) {
-//     deleteUser(editButton)
+    idInput.value = cells[0].textContent;
+    nameInput.value = cells[1].textContent;
+    ageInput.value = cells[2].textContent;
+    genderInput.value = cells[3].textContent;
+    designationInput.value = cells[4].textContent;
+    photoInput.value = cells[5].getElementsByTagName("img")[0].getAttribute("src");
 
-//     // Get the row and column containing the edit button
-//     const row = editButton.parentNode.parentNode;
-//     const cells = row.getElementsByTagName("td");
+    table.deleteRow(row.rowIndex);
+}
 
-//     //show the inputs
-//     idInput.value = cells[0].textContent;
-//     nameInput.value = cells[1].textContent;
-//     ageInput.value = cells[2].textContent;
-//     genderInput.value = cells[3].textContent;
-//     designationInput.value = cells[4].textContent;
-//     photoInput.value = cells[5].getElementsByTagName("img")[0].getAttribute("src");
-
-    // let newid = idInput.value
-    // let newnameInput = nameInput.value
-    // let newageInput = ageInput.value
-    // let newgenderInput = genderInput.value
-    // let newdesignationInput = designationInput.value
-    // let newphotoInput = photoInput.value
-
-    // if (!(newid = idInput.value) && !(newnameInput = nameInput.value) 
-    //     && !(newageInput = ageInput.value) 
-    //         &&!(newgenderInput = genderInput.value)
-    //             &&!(newdesignationInput = designationInput.value)
-    //                 &&!(newphotoInput = photoInput.value)) 
-    //                 {
-    //                     validateForm()
-    //                     alert("Data edited")
-    //                 }
-// }
-
-//delete user
 function deleteUser(deleteButton) {
-    //get the row
-    //find the element that hsa this delete , find its parent twice
     const row = deleteButton.parentNode.parentNode;
     table.deleteRow(row.rowIndex);
 }
 
-//only to view
 function viewUser(viewButton) {
     // You can implement the "view" functionality as per your requirements.
     // For this example, we won't add any specific view functionality.
@@ -189,94 +145,17 @@ function viewUser(viewButton) {
     genderInput.value = cells[3].textContent;
     designationInput.value = cells[4].textContent;
     photoInput.value = cells[5].getElementsByTagName("img")[0].getAttribute("src");
-
 }
 
-//to scroll down
-function scrollDown() {
-    window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth"
+function searchUser() {
+    const filterInput = document.getElementById("filterInput");
+    const rows = document.querySelectorAll("#userTable tr:not(:first-child)");
+    const filterValue = filterInput.value.toLowerCase();
+
+    rows.forEach(row => {
+        const cells = row.getElementsByTagName("td");
+        const cellTexts = Array.from(cells).map(cell => cell.textContent || cell.innerText);
+        const showRow = cellTexts.some(cellText => cellText.toLowerCase().includes(filterValue));
+        row.style.display = showRow ? "" : "none";
     });
 }
-
-//not working
-function searcher(){
-    document.addEventListener("DOMContentLoaded", function() {
-        const filterInput = document.getElementById("filterInput");
-        const dataTable = document.getElementById("dataTable");
-        const rows = dataTable.getElementsByTagName("tr");
-    
-        filterInput.addEventListener("keyup", function() {
-            const filterValue = filterInput.value.toLowerCase();
-    
-            for (let i = 1; i < rows.length; i++) { // Start from index 1 to skip the header row
-                const row = rows[i];
-                const cells = row.getElementsByTagName("td");
-    
-                // Convert the HTMLCollection to an array to use the filter() method
-                const cellTexts = Array.from(cells).map(cell => cell.textContent || cell.innerText);
-    
-                const showRow = cellTexts.some(cellText => cellText.toLowerCase().includes(filterValue));
-    
-                row.style.display = showRow ? "" : "none";
-            }
-        });
-    });
-
-}
-
-// Rest of the JavaScript remains the same
-
-// Function to edit user data
-function editUser(editButton) {
-    // Get the row and column containing the edit button
-    const row = editButton.parentNode.parentNode;
-    const cells = row.getElementsByTagName("td");
-  
-    // Show the "Edit User" section
-    document.getElementById("editUserSection").style.display = "block";
-  
-    // Populate the form with the existing data
-    idInput.value = cells[0].textContent;
-    nameInput.value = cells[1].textContent;
-    ageInput.value = cells[2].textContent;
-    genderInput.value = cells[3].textContent;
-    designationInput.value = cells[4].textContent;
-    photoInput.value = cells[5].getElementsByTagName("img")[0].getAttribute("src");
-  }
-  
-  // Function to save edited user data
-  function saveUser() {
-    // Get the edited data from the input fields
-    const editedId = idInput.value;
-    const editedName = nameInput.value;
-    const editedAge = ageInput.value;
-    const editedGender = genderInput.value;
-    const editedDesignation = designationInput.value;
-    const editedPhotoUrl = photoInput.value;
-  
-    // Find the row to update in the table
-    const rows = table.getElementsByTagName("tr");
-    for (let i = 1; i < rows.length; i++) { // Skip the header row
-      const cells = rows[i].getElementsByTagName("td");
-      if (cells[0].textContent === editedId.value) {
-        // Update the row with the edited data
-        cells[1].textContent = editedName.value;
-        cells[2].textContent = editedAge.value;
-        cells[3].textContent = editedGender.value;
-        cells[4].textContent = editedDesignation.value;
-        cells[5].getElementsByTagName("img")[0].setAttribute("src", editedPhotoUrl);
-  
-        // Hide the "Edit User" section
-        document.getElementById("editUserSection").style.display = "none";
-  
-        // Show success message
-        alert("Data edited successfully!");
-        return;
-      }
-    }
-  
-    // If the ID is not found, show an error message
-    alert("User with ID " + editedId + " not found.");
-  }

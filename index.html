@@ -43,59 +43,32 @@
             <input placeholder="Enter your pic's url" type="text" id="photo" required>
             <div class="error" id="photoError"></div>
 
-            <button style="width: 100%;"  class="user" onclick="addUser()">Add</button>
-
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-              </div>
-              
+            <button style="width: 100%;" class="user" onclick="addUser()">Add</button>
         </div>
     </div>
     <br>
     <br>
     <br>
 
-    <!-- ... -->
-<div class="table" id="section2">
-    <h2 class="user">User List</h2>
-    <form class="search-form">
-      <!-- ... -->
-    </form>
-    <table id="userTable" style="width: 100%;">
-      <tr class="userTable">
-        <th>ID</th>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Gender</th>
-        <th>Designation</th>
-        <th>Self Photo</th>
-        <th>Actions</th>
-      </tr>
-    </table>
-  </div>
-  
- 
+    <div class="table" id="section2">
+        <h2 class="user">User List</h2>
+        <form class="search-form">
+            <input type="text" class="search-input" id="filterInput" placeholder="Search by entering any parameters">
+            <button type="button" onclick="searchUser()" class="search-button">Search</button>
+        </form>
+        <table id="userTable">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Designation</th>
+                <th>Self Photo</th>
+                <th>Actions</th>
+            </tr>
+        </table>
+    </div>
 
-  
-      <!-- ID input for editing, marked as readonly -->
-      <div class="form" id="editUserSection" style="display: none;">
-          <h2 class="user">Edit User</h2>
-          <label class="user" for="editedId">ID:</label>
-          <input placeholder="Enter your id" type="text" id="editedId">
-          <div class="error" id="editedIdError"></div>
-  
-          <!-- Rest of the input fields for editing user data -->
-          <!-- ... -->
-  
-          <button style="width: 100%;" class="user" onclick="saveUser()">Save</button>
-      </div>
-  
     <script src="script.js"></script>
 </body>
 </html>
