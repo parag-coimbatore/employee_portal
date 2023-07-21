@@ -118,40 +118,64 @@ function addUser() {
             <td class="actions">
                 <button class="edit" onclick="editUser(this)">Edit</button>
                 <button class="delete" onclick="deleteUser(this)">Delete</button>
-                <button class="view" onclick="viewUser(this)">View</button>
+                <button class="view" onclick="viewUser(this)" readonly>View</button>
             </td>
         `;
-        resetForm();
-        scrollDown();
+        resetForm(); //resets form
+        scrollDown(); //scrolls down
     }
 }
 
+//scrolls down as soon as something is added
 function scrollToSection(sectionId) {
     const section = document.getElementById(sectionId);
     section.scrollIntoView({ behavior: "smooth" });
 }
 
 
-function editUser(editButton) {
-    const row = editButton.parentNode.parentNode;
-    const cells = row.getElementsByTagName("td");
+// //not working
+// function editUser(editButton) {
+//     deleteUser(editButton)
 
-    idInput.value = cells[0].textContent;
-    nameInput.value = cells[1].textContent;
-    ageInput.value = cells[2].textContent;
-    genderInput.value = cells[3].textContent;
-    designationInput.value = cells[4].textContent;
-    photoInput.value = cells[5].getElementsByTagName("img")[0].getAttribute("src");
+//     // Get the row and column containing the edit button
+//     const row = editButton.parentNode.parentNode;
+//     const cells = row.getElementsByTagName("td");
 
+//     //show the inputs
+//     idInput.value = cells[0].textContent;
+//     nameInput.value = cells[1].textContent;
+//     ageInput.value = cells[2].textContent;
+//     genderInput.value = cells[3].textContent;
+//     designationInput.value = cells[4].textContent;
+//     photoInput.value = cells[5].getElementsByTagName("img")[0].getAttribute("src");
 
+    // let newid = idInput.value
+    // let newnameInput = nameInput.value
+    // let newageInput = ageInput.value
+    // let newgenderInput = genderInput.value
+    // let newdesignationInput = designationInput.value
+    // let newphotoInput = photoInput.value
 
-}
+    // if (!(newid = idInput.value) && !(newnameInput = nameInput.value) 
+    //     && !(newageInput = ageInput.value) 
+    //         &&!(newgenderInput = genderInput.value)
+    //             &&!(newdesignationInput = designationInput.value)
+    //                 &&!(newphotoInput = photoInput.value)) 
+    //                 {
+    //                     validateForm()
+    //                     alert("Data edited")
+    //                 }
+// }
 
+//delete user
 function deleteUser(deleteButton) {
+    //get the row
+    //find the element that hsa this delete , find its parent twice
     const row = deleteButton.parentNode.parentNode;
     table.deleteRow(row.rowIndex);
 }
 
+//only to view
 function viewUser(viewButton) {
     // You can implement the "view" functionality as per your requirements.
     // For this example, we won't add any specific view functionality.
@@ -165,8 +189,10 @@ function viewUser(viewButton) {
     genderInput.value = cells[3].textContent;
     designationInput.value = cells[4].textContent;
     photoInput.value = cells[5].getElementsByTagName("img")[0].getAttribute("src");
+
 }
 
+//to scroll down
 function scrollDown() {
     window.scrollTo({
         top: document.body.scrollHeight,
@@ -174,6 +200,7 @@ function scrollDown() {
     });
 }
 
+//not working
 function searcher(){
     document.addEventListener("DOMContentLoaded", function() {
         const filterInput = document.getElementById("filterInput");
@@ -199,4 +226,57 @@ function searcher(){
 
 }
 
+// Rest of the JavaScript remains the same
 
+// Function to edit user data
+function editUser(editButton) {
+    // Get the row and column containing the edit button
+    const row = editButton.parentNode.parentNode;
+    const cells = row.getElementsByTagName("td");
+  
+    // Show the "Edit User" section
+    document.getElementById("editUserSection").style.display = "block";
+  
+    // Populate the form with the existing data
+    idInput.value = cells[0].textContent;
+    nameInput.value = cells[1].textContent;
+    ageInput.value = cells[2].textContent;
+    genderInput.value = cells[3].textContent;
+    designationInput.value = cells[4].textContent;
+    photoInput.value = cells[5].getElementsByTagName("img")[0].getAttribute("src");
+  }
+  
+  // Function to save edited user data
+  function saveUser() {
+    // Get the edited data from the input fields
+    const editedId = idInput.value;
+    const editedName = nameInput.value;
+    const editedAge = ageInput.value;
+    const editedGender = genderInput.value;
+    const editedDesignation = designationInput.value;
+    const editedPhotoUrl = photoInput.value;
+  
+    // Find the row to update in the table
+    const rows = table.getElementsByTagName("tr");
+    for (let i = 1; i < rows.length; i++) { // Skip the header row
+      const cells = rows[i].getElementsByTagName("td");
+      if (cells[0].textContent === editedId.value) {
+        // Update the row with the edited data
+        cells[1].textContent = editedName.value;
+        cells[2].textContent = editedAge.value;
+        cells[3].textContent = editedGender.value;
+        cells[4].textContent = editedDesignation.value;
+        cells[5].getElementsByTagName("img")[0].setAttribute("src", editedPhotoUrl);
+  
+        // Hide the "Edit User" section
+        document.getElementById("editUserSection").style.display = "none";
+  
+        // Show success message
+        alert("Data edited successfully!");
+        return;
+      }
+    }
+  
+    // If the ID is not found, show an error message
+    alert("User with ID " + editedId + " not found.");
+  }
